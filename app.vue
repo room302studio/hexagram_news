@@ -9,6 +9,6 @@
 <style>
 /* use Figtree font for everything */
 body {
-  font-family: 'Figtree', sans-serif;
+  font-family: 'Karla', sans-serif;
 }
 </style>
