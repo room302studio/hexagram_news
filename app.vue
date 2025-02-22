@@ -1,14 +1,12 @@
 <template>
-  <main>
-    <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
-  </main>
+  <NuxtPage />
 </template>
-<script setup></script>
+
 <style>
 /* use Figtree font for everything */
 body {
   font-family: 'Karla', sans-serif;
+  margin: 0;
+  padding: 0;
 }
 </style>

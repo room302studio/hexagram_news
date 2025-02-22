@@ -25,7 +25,11 @@ export default defineNuxtConfig({
       '@nuxtjs/google-fonts',
       {
         families: {
-          Karla: [300, 400, 600, 700, 800]
+          Karla: [400, 500, 600, 700, 800],
+          Newsreader: {
+            wght: [300, 400, 500, 600, 700],
+            ital: [300, 400, 500, 600, 700]
+          }
         }
       }
     ]
@@ -39,7 +43,7 @@ export default defineNuxtConfig({
     }
   },
 
-  css: ['~/assets/css/main.css'],
+  css: ['~/assets/css/fonts.css', '~/assets/css/main.css'],
 
   postcss: {
     plugins: {
