@@ -26,6 +26,7 @@
     "date-fns": "^4.1.0",
     "dotenv": "^16.4.7",
     "eslint-config-prettier": "^9.0.0",
+    "marked": "^15.0.7",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.14",
     "v-onboarding": "^2.5.1"
