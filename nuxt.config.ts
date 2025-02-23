@@ -16,7 +16,16 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   modules: [
-    '@nuxtjs/supabase',
+    [
+      '@nuxtjs/supabase',
+      {
+        redirect: false,
+        cookieOptions: {
+          secure: false,
+          sameSite: 'lax'
+        }
+      }
+    ],
     '@vueuse/nuxt',
     [
       '@nuxtjs/google-fonts',
