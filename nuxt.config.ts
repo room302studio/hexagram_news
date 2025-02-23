@@ -19,7 +19,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   modules: [
-    // '@nuxtjs/supabase',
+    '@nuxtjs/supabase',
     '@vueuse/nuxt',
     [
       '@nuxtjs/google-fonts',
@@ -37,6 +37,8 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
+      supabaseUrl: process.env.SUPABASE_URL,
+      supabaseKey: process.env.SUPABASE_KEY,
       OPENROUTER_API_KEY: process.env.OPENROUTER_API_KEY,
       OPENAI_API_KEY: process.env.OPENAI_API_KEY,
       PRODUCTION: process.env.PRODUCTION
