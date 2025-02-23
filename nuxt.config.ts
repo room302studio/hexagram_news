@@ -54,5 +54,11 @@ export default defineNuxtConfig({
     }
   },
 
+  build: {
+    rollupOptions: {
+      external: ['date-fns']
+    }
+  },
+
   compatibilityDate: '2025-02-22'
 })
