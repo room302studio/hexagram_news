@@ -13,9 +13,6 @@ export default defineNuxtConfig({
     }
   },
 
-  // for netlify deploy
-  ssr: false,
-
   devtools: { enabled: true },
 
   modules: [
@@ -58,7 +55,5 @@ export default defineNuxtConfig({
     rollupOptions: {
       external: ['date-fns']
     }
-  },
-
-  compatibilityDate: '2025-02-22'
+  }
 })
