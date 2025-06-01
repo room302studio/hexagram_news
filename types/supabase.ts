@@ -1,86 +1,87 @@
 export interface Database {
   public: {
     Tables: {
-      hexagramnews: {
+      scraps: {
         Row: {
-          id: number
-          title: string
-          url: string
-          source: string
-          timestamp: string
+          id: string
+          content: string | null
           summary: string | null
-          created_at: string
-          updated_at: string
+          created_at: string | null
+          updated_at: string | null
+          tags: string[] | null
+          relationships: any | null
+          metadata: any | null
+          scrap_id: string | null
+          embedding: number[] | null
+          graph_imported: boolean | null
+          url: string | null
+          screenshot_url: string | null
+          location: string | null
+          title: string | null
+          latitude: number | null
+          longitude: number | null
+          type: string | null
+          published_at: string | null
+          shared: boolean | null
+          embedding_nomic: number[] | null
+          image_embedding: number[] | null
+          processing_instance_id: string | null
+          processing_started_at: string | null
+          source: string | null
         }
         Insert: {
-          title: string
-          url: string
-          source: string
-          timestamp?: string
+          id?: string
+          content?: string | null
           summary?: string | null
-          created_at?: string
-          updated_at?: string
+          created_at?: string | null
+          updated_at?: string | null
+          tags?: string[] | null
+          relationships?: any | null
+          metadata?: any | null
+          scrap_id?: string | null
+          embedding?: number[] | null
+          graph_imported?: boolean | null
+          url?: string | null
+          screenshot_url?: string | null
+          location?: string | null
+          title?: string | null
+          latitude?: number | null
+          longitude?: number | null
+          type?: string | null
+          published_at?: string | null
+          shared?: boolean | null
+          embedding_nomic?: number[] | null
+          image_embedding?: number[] | null
+          processing_instance_id?: string | null
+          processing_started_at?: string | null
+          source?: string | null
         }
         Update: {
-          title?: string
-          url?: string
-          source?: string
-          timestamp?: string
+          id?: string
+          content?: string | null
           summary?: string | null
-          updated_at?: string
-        }
-      }
-      tags: {
-        Row: {
-          id: number
-          name: string
-          created_at: string
-        }
-        Insert: {
-          name: string
-          created_at?: string
-        }
-        Update: {
-          name?: string
-        }
-      }
-      news_tags: {
-        Row: {
-          news_id: number
-          tag_id: number
-          created_at: string
-        }
-        Insert: {
-          news_id: number
-          tag_id: number
-          created_at?: string
-        }
-        Update: {
-          news_id?: number
-          tag_id?: number
-        }
-      }
-      subscriptions: {
-        Row: {
-          id: number
-          email: string
-          verified: boolean
-          verification_token: string
-          created_at: string
-          updated_at: string
-        }
-        Insert: {
-          email: string
-          verified?: boolean
-          verification_token?: string
-          created_at?: string
-          updated_at?: string
-        }
-        Update: {
-          email?: string
-          verified?: boolean
-          verification_token?: string
-          updated_at?: string
+          created_at?: string | null
+          updated_at?: string | null
+          tags?: string[] | null
+          relationships?: any | null
+          metadata?: any | null
+          scrap_id?: string | null
+          embedding?: number[] | null
+          graph_imported?: boolean | null
+          url?: string | null
+          screenshot_url?: string | null
+          location?: string | null
+          title?: string | null
+          latitude?: number | null
+          longitude?: number | null
+          type?: string | null
+          published_at?: string | null
+          shared?: boolean | null
+          embedding_nomic?: number[] | null
+          image_embedding?: number[] | null
+          processing_instance_id?: string | null
+          processing_started_at?: string | null
+          source?: string | null
         }
       }
     }

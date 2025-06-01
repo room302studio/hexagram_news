@@ -1,27 +1,13 @@
 import type { Database } from '~/types/supabase'
 
 export interface HeadlineArticle {
-  id: number
+  id: string
   title: string
   url: string
   source: string
   timestamp: string
   tags: string[]
   summary: string | null
-}
-
-interface NewsTagsResponse {
-  id: number
-  title: string
-  url: string
-  source: string
-  timestamp: string
-  summary: string | null
-  news_tags: Array<{
-    tags: {
-      name: string
-    }
-  }>
 }
 
 export const useHeadlines = () => {
@@ -37,44 +23,44 @@ export const useHeadlines = () => {
     error.value = null
 
     try {
-      const { data, error: supabaseError } = await client
-        .from('hexagramnews')
+      const query = client
+        .from('scraps')
         .select(
           `
           id,
           title,
           url,
           source,
-          timestamp,
+          created_at,
+          published_at,
           summary,
-          news_tags!inner (
-            tags (
-              name
-            )
-          )
+          tags
         `
         )
-        .order('timestamp', { ascending: false })
+        .not('title', 'is', null)
+        .not('url', 'is', null)
+        .order('created_at', { ascending: false })
         .limit(options.limit || 10)
+
+      const { data, error: supabaseError } = await query
 
       if (supabaseError) throw supabaseError
       if (!data) return []
 
       // Transform the data to match our interface
       const articles: HeadlineArticle[] = data.map((article) => ({
-        id: article.id as number,
-        title: article.title as string,
-        url: article.url as string,
-        source: article.source as string,
-        timestamp: article.timestamp as string,
-        summary: article.summary as string | null,
-        tags: ((article.news_tags ?? []) as any[]).map(
-          (tag) => tag.tags.name as string
-        )
+        id: article.id,
+        title: article.title || 'Untitled',
+        url: article.url || '#',
+        source: article.source || 'Unknown Source',
+        timestamp: article.published_at || article.created_at,
+        summary: article.summary,
+        tags: Array.isArray(article.tags) ? article.tags : []
       }))
 
       return articles
     } catch (err) {
+      console.error('Supabase query error:', err)
       error.value = err as Error
       return []
     } finally {
@@ -82,7 +68,7 @@ export const useHeadlines = () => {
     }
   }
 
-  // Convenience composables for specific types of headlines
+  // Convenience methods for specific types of headlines
   const topNews = async (limit = 3) => fetchHeadlines({ type: 'top', limit })
   const latestNews = async (limit = 3) =>
     fetchHeadlines({ type: 'latest', limit })
