@@ -51,6 +51,8 @@ export default defineNuxtConfig({
     }
   },
 
+  ssr: true,
+
   css: ['~/assets/css/fonts.css', '~/assets/css/main.css'],
 
   postcss: {

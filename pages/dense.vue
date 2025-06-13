@@ -79,9 +79,15 @@ import useScraps from '~/composables/useScraps'
 
 const ITEMS_PER_PAGE = 200
 
-const { scraps, isLoading, error, loadMore, hasMoreScraps, totalScraps } = useScraps()
+const { scraps, isLoading, error, loadMore, hasMoreScraps, totalScraps, fetchScraps } = useScraps()
 const loadMoreTrigger = ref(null)
 const scrapElements = ref([])
+
+// Fetch initial data
+await fetchScraps({
+  limit: ITEMS_PER_PAGE,
+  sortBy: 'newest'
+})
 
 const getMostRelevantDate = (scrap) => {
   return new Date(
@@ -138,7 +144,7 @@ useIntersectionObserver(
   loadMoreTrigger,
   ([{ isIntersecting }]) => {
     if (isIntersecting && !isLoading.value && hasMoreScraps.value) {
-      loadMore({ limit: ITEMS_PER_PAGE })
+      loadMore()
     }
   },
   { threshold: 0.5 }
