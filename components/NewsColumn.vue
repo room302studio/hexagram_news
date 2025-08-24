@@ -1,7 +1,8 @@
 <template>
   <div class="column">
     <h2
-      class="text-xl md:text-2xl lg:text-3xl font-['Karla'] font-extrabold border-b border-gray-200 pb-3 mb-6 md:mb-8 leading-none tracking-tight">
+      class="text-xl md:text-2xl lg:text-3xl font-['Karla'] font-extrabold border-b border-gray-200 pb-3 mb-6 md:mb-8 leading-none tracking-tight"
+    >
       {{ title }}
     </h2>
 
@@ -25,7 +26,11 @@
 
     <!-- Articles list -->
     <ul v-else class="space-y-6 md:space-y-8">
-      <HeadlineLink v-for="article in articles" :key="article.id" :article="article" />
+      <HeadlineLink
+        v-for="article in articles"
+        :key="article.id"
+        :article="article"
+      />
     </ul>
   </div>
 </template>
@@ -40,12 +45,13 @@ defineProps({
     type: Array,
     required: true,
     validator: (prop) => {
-      return prop.every(article =>
-        article.id &&
-        article.title &&
-        article.url &&
-        article.source &&
-        article.timestamp
+      return prop.every(
+        (article) =>
+          article.id &&
+          article.title &&
+          article.url &&
+          article.source &&
+          article.timestamp
       )
     }
   },

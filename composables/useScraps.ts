@@ -104,8 +104,10 @@ export default function useScraps() {
       let query = supabase.from('scraps').select('*', { count: 'exact' })
 
       // IMPORTANT: Only fetch scraps with substantial content
-      query = query.or('content.not.is.null,summary.not.is.null,screenshot_url.not.is.null')
-      
+      query = query.or(
+        'content.not.is.null,summary.not.is.null,screenshot_url.not.is.null'
+      )
+
       // Apply filters
       if (options.filters?.type) {
         query = query.eq('type', options.filters.type)

@@ -4,27 +4,38 @@
       <!-- Title -->
       <a :href="article.url" class="block group">
         <h3
-          class="text-sm md:text-base lg:text-lg font-['Karla'] leading-tight font-extrabold group-hover:text-blue-600 transition-colors">
+          class="text-sm md:text-base lg:text-lg font-['Karla'] leading-tight font-extrabold group-hover:text-blue-600 transition-colors"
+        >
           {{ article.title }}
         </h3>
       </a>
 
       <!-- Summary -->
-      <div v-if="article.summary"
+      <div
+        v-if="article.summary"
         class="mt-1 text-xs font-['Newsreader'] leading-snug text-gray-600 prose-em:italic prose-strong:font-semibold md:text-sm lg:text-base"
-        v-html="markdownToHtml(article.summary)" />
+        v-html="markdownToHtml(article.summary)"
+      />
 
       <!-- Metadata and Tags -->
       <div class="mt-1 flex flex-col gap-1">
         <!-- Source and time -->
         <div class="flex items-baseline gap-1.5">
-          <MetaData class="font-bold uppercase tracking-wider">{{ article.source }}</MetaData>
-          <MetaData class="tabular-nums">{{ formatDate(article.timestamp) }}</MetaData>
+          <MetaData class="font-bold uppercase tracking-wider">{{
+            article.source
+          }}</MetaData>
+          <MetaData class="tabular-nums">{{
+            formatDate(article.timestamp)
+          }}</MetaData>
         </div>
 
         <!-- Tags -->
         <div class="flex flex-wrap gap-0.5">
-          <MetaData v-for="tag in article.tags" :key="tag" class="bg-gray-50 px-1 py-px rounded-sm">
+          <MetaData
+            v-for="tag in article.tags"
+            :key="tag"
+            class="bg-gray-50 px-1 py-px rounded-sm"
+          >
             {{ tag }}
           </MetaData>
         </div>
@@ -37,17 +48,19 @@
 import { formatDistance } from 'date-fns'
 import { marked } from 'marked'
 
-const props = defineProps({
+defineProps({
   article: {
     type: Object,
     required: true,
     validator: (prop) => {
-      return prop.id &&
+      return (
+        prop.id &&
         prop.title &&
         prop.url &&
         prop.source &&
         prop.timestamp &&
         Array.isArray(prop.tags)
+      )
     }
   }
 })

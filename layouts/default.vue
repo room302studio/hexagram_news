@@ -5,5 +5,5 @@
 </template>
 
 <script setup>
-const { isMobile } = useBreakpoint()
+// Layout component
 </script>

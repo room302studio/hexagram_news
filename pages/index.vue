@@ -9,11 +9,17 @@
               <h1 class="text-3xl md:text-4xl font-bold text-black">
                 Hexagram News
               </h1>
-              <p class="text-sm text-gray-600 mt-1">Tech news without the bullshit</p>
+              <p class="text-sm text-gray-600 mt-1">
+                Tech news without the bullshit
+              </p>
             </div>
             <div class="flex gap-4 text-sm">
-              <NuxtLink to="/dense" class="hover:underline">Dense View</NuxtLink>
-              <span class="text-gray-500">{{ new Date().toLocaleDateString() }}</span>
+              <NuxtLink to="/dense" class="hover:underline"
+                >Dense View</NuxtLink
+              >
+              <span class="text-gray-500">{{
+                new Date().toLocaleDateString()
+              }}</span>
             </div>
           </div>
         </div>
@@ -26,19 +32,30 @@
           <div class="grid md:grid-cols-3 gap-8">
             <div class="md:col-span-2">
               <h2 class="text-2xl md:text-3xl font-bold mb-4 leading-tight">
-                <a :href="leadStory.url" target="_blank" class="hover:underline">
+                <a
+                  :href="leadStory.url"
+                  target="_blank"
+                  class="hover:underline"
+                >
                   {{ getDisplayTitle(leadStory) }}
                 </a>
               </h2>
-              <p v-if="leadStory.summary" class="text-gray-700 leading-relaxed mb-4 text-lg">
+              <p
+                v-if="leadStory.summary"
+                class="text-gray-700 leading-relaxed mb-4 text-lg"
+              >
                 {{ leadStory.summary }}
               </p>
               <div class="flex items-center gap-4 text-sm text-gray-500">
-                <span class="font-medium">{{ getSourceLabel(leadStory.source) }}</span>
-                <span>{{ formatTime(leadStory.published_at || leadStory.created_at) }}</span>
+                <span class="font-medium">{{
+                  getSourceLabel(leadStory.source)
+                }}</span>
+                <span>{{
+                  formatTime(leadStory.published_at || leadStory.created_at)
+                }}</span>
                 <div class="flex gap-2">
-                  <NuxtLink 
-                    v-for="tag in (leadStory.tags || []).slice(0, 3)" 
+                  <NuxtLink
+                    v-for="tag in (leadStory.tags || []).slice(0, 3)"
                     :key="tag"
                     :to="`/tag/${tag}`"
                     class="hover:underline"
@@ -49,8 +66,8 @@
               </div>
             </div>
             <div v-if="getMediaUrl(leadStory)" class="md:col-span-1">
-              <img 
-                :src="getMediaUrl(leadStory)" 
+              <img
+                :src="getMediaUrl(leadStory)"
                 :alt="getDisplayTitle(leadStory)"
                 class="w-full h-48 object-cover border"
               />
@@ -62,12 +79,10 @@
         <div class="grid md:grid-cols-2 gap-12">
           <!-- Left Column - Latest -->
           <section>
-            <h3 class="text-lg font-bold mb-6 pb-2 border-b">
-              Latest
-            </h3>
+            <h3 class="text-lg font-bold mb-6 pb-2 border-b">Latest</h3>
             <div class="space-y-6">
-              <article 
-                v-for="scrap in latestScraps" 
+              <article
+                v-for="scrap in latestScraps"
                 :key="scrap.id"
                 class="pb-4 border-b border-gray-100 last:border-b-0"
               >
@@ -76,14 +91,24 @@
                     {{ getDisplayTitle(scrap) }}
                   </a>
                 </h4>
-                <p v-if="scrap.content || scrap.summary" class="text-gray-700 mb-3 line-clamp-3">
-                  {{ (scrap.summary || scrap.content || '').substring(0, 200) }}{{ (scrap.summary || scrap.content || '').length > 200 ? '...' : '' }}
+                <p
+                  v-if="scrap.content || scrap.summary"
+                  class="text-gray-700 mb-3 line-clamp-3"
+                >
+                  {{ (scrap.summary || scrap.content || '').substring(0, 200)
+                  }}{{
+                    (scrap.summary || scrap.content || '').length > 200
+                      ? '...'
+                      : ''
+                  }}
                 </p>
                 <div class="flex items-center gap-4 text-sm text-gray-500">
                   <span>{{ getSourceLabel(scrap.source) }}</span>
-                  <span>{{ formatTime(scrap.published_at || scrap.created_at) }}</span>
-                  <div class="flex gap-2" v-if="scrap.tags?.length">
-                    <NuxtLink 
+                  <span>{{
+                    formatTime(scrap.published_at || scrap.created_at)
+                  }}</span>
+                  <div v-if="scrap.tags?.length" class="flex gap-2">
+                    <NuxtLink
                       v-for="tag in scrap.tags.slice(0, 2)"
                       :key="tag"
                       :to="`/tag/${tag}`"
@@ -99,17 +124,15 @@
 
           <!-- Right Column - Visual Stories -->
           <section>
-            <h3 class="text-lg font-bold mb-6 pb-2 border-b">
-              Visual Stories
-            </h3>
+            <h3 class="text-lg font-bold mb-6 pb-2 border-b">Visual Stories</h3>
             <div class="space-y-6">
-              <article 
-                v-for="scrap in curatedScraps" 
+              <article
+                v-for="scrap in curatedScraps"
                 :key="scrap.id"
                 class="pb-4 border-b border-gray-100 last:border-b-0"
               >
                 <div v-if="getMediaUrl(scrap)" class="mb-3">
-                  <img 
+                  <img
                     :src="getMediaUrl(scrap)"
                     :alt="getDisplayTitle(scrap)"
                     class="w-full h-40 object-cover border"
@@ -121,10 +144,11 @@
                   </a>
                 </h4>
                 <p v-if="scrap.summary" class="text-gray-700 mb-3">
-                  {{ scrap.summary.substring(0, 150) }}{{ scrap.summary.length > 150 ? '...' : '' }}
+                  {{ scrap.summary.substring(0, 150)
+                  }}{{ scrap.summary.length > 150 ? '...' : '' }}
                 </p>
                 <div class="flex flex-wrap gap-2 text-sm">
-                  <NuxtLink 
+                  <NuxtLink
                     v-for="tag in (scrap.tags || []).slice(0, 3)"
                     :key="tag"
                     :to="`/tag/${tag}`"
@@ -140,10 +164,10 @@
 
         <!-- Load More -->
         <div v-if="hasMoreScraps" class="mt-12 text-center">
-          <button 
-            @click="loadMore"
+          <button
             :disabled="isLoading"
             class="px-6 py-3 border hover:bg-gray-50 transition-colors"
+            @click="loadMore"
           >
             {{ isLoading ? 'Loading...' : 'Load More Stories' }}
           </button>
@@ -153,7 +177,10 @@
       <!-- Footer -->
       <footer class="border-t mt-12 py-8">
         <div class="max-w-6xl mx-auto px-4 text-center text-sm text-gray-500">
-          <p>{{ totalScraps }} stories • Updated {{ new Date().toLocaleTimeString() }}</p>
+          <p>
+            {{ totalScraps }} stories • Updated
+            {{ new Date().toLocaleTimeString() }}
+          </p>
         </div>
       </footer>
     </div>
@@ -164,9 +191,9 @@
 import { formatDistanceToNow } from 'date-fns'
 
 // Use the enhanced composable
-const { 
-  scraps, 
-  isLoading, 
+const {
+  scraps,
+  isLoading,
   totalScraps,
   hasMoreScraps,
   loadMore: loadMoreScraps,
@@ -184,21 +211,22 @@ await fetchScraps({
 // Computed properties for different sections
 const leadStory = computed(() => {
   // Find the first scrap with substantial content AND an image
-  return scraps.value.find(s => 
-    (s.content || s.summary) && getMediaUrl(s)
-  ) || scraps.value[0]
+  return (
+    scraps.value.find((s) => (s.content || s.summary) && getMediaUrl(s)) ||
+    scraps.value[0]
+  )
 })
 
 const latestScraps = computed(() => {
-  return scraps.value
-    .filter(s => s.id !== leadStory.value?.id)
-    .slice(0, 10)
+  return scraps.value.filter((s) => s.id !== leadStory.value?.id).slice(0, 10)
 })
 
 const curatedScraps = computed(() => {
   // Prioritize scraps with images and summaries
   return scraps.value
-    .filter(s => s.id !== leadStory.value?.id && (s.summary || getMediaUrl(s)))
+    .filter(
+      (s) => s.id !== leadStory.value?.id && (s.summary || getMediaUrl(s))
+    )
     .slice(0, 8)
 })
 

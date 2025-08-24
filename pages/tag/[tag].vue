@@ -59,7 +59,7 @@
           <h3 class="font-mono text-xs text-zinc-500 mb-2 opacity-60">{{ formatGroupDate(date) }} ({{ group.length }})</h3>
 
           <div class="space-y-0">
-            <DataDense v-for="scrap in group" :key="scrap.id" :scrap="scrap" ref="scrapElements" />
+            <DataDense v-for="scrap in group" :key="scrap.id" ref="scrapElements" :scrap="scrap" />
           </div>
         </section>
 
@@ -80,7 +80,7 @@
 import { ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useIntersectionObserver } from '@vueuse/core'
-import { format, parseISO, isThisMonth, isThisYear } from 'date-fns'
+import { format, isThisMonth, isThisYear } from 'date-fns'
 import DataDense from '~/components/DataDense.vue'
 
 const route = useRoute()
@@ -125,7 +125,7 @@ const fetchTaggedScraps = async (page = 1) => {
     const limit = ITEMS_PER_PAGE * 5 // Fetch more to account for filtering
     query = query.range(0, limit - 1)
 
-    const { data: allData, error: queryError, count: totalCount } = await query
+    const { data: allData, error: queryError } = await query
 
     if (queryError) throw queryError
 

@@ -30,6 +30,6 @@ export const useAppStore = createGlobalState(() => {
     itemList,
     setActiveItem,
     addItem,
-    removeItem,
+    removeItem
   }
 })

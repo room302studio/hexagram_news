@@ -2,6 +2,38 @@ module.exports = {
   root: true,
   env: {
     node: true,
+    browser: true,
+    es2021: true,
+  },
+  globals: {
+    useRuntimeConfig: 'readonly',
+    definePageMeta: 'readonly',
+    navigateTo: 'readonly',
+    useRoute: 'readonly',
+    useRouter: 'readonly',
+    useState: 'readonly',
+    useNuxtData: 'readonly',
+    useAsyncData: 'readonly',
+    useFetch: 'readonly',
+    useLazyFetch: 'readonly',
+    useLazyAsyncData: 'readonly',
+    useHead: 'readonly',
+    useSeoMeta: 'readonly',
+    defineNuxtComponent: 'readonly',
+    defineNuxtPlugin: 'readonly',
+    defineEventHandler: 'readonly',
+    $fetch: 'readonly',
+    ref: 'readonly',
+    computed: 'readonly',
+    reactive: 'readonly',
+    watch: 'readonly',
+    watchEffect: 'readonly',
+    onMounted: 'readonly',
+    onBeforeMount: 'readonly',
+    onUnmounted: 'readonly',
+    onBeforeUnmount: 'readonly',
+    useBreakpoint: 'readonly',
+    useScraps: 'readonly',
   },
   extends: [
     'plugin:vue/recommended',
@@ -9,7 +41,10 @@ module.exports = {
     'prettier'
   ],
   parserOptions: {
-    parser: 'babel-eslint',
+    parser: '@babel/eslint-parser',
+    requireConfigFile: false,
+    ecmaVersion: 'latest',
+    sourceType: 'module',
   },
   rules: {
     // override/add rules settings here, such as:
@@ -20,5 +55,7 @@ module.exports = {
     'vue/brace-style': 'warn',
     'vue/key-spacing': 'warn',
     'vue/no-console': 'warn',
+    'vue/multi-word-component-names': 'off',
+    'no-unused-vars': ['error', { 'argsIgnorePattern': '^_' }],
   },
 };

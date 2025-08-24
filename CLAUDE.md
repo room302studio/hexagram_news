@@ -5,9 +5,11 @@ This document explains how to integrate the data-dense scrapbook components copi
 ## Components Copied Over
 
 ### 1. `DataDense.vue` - Hacker-aesthetic data row component
+
 **Location**: `components/DataDense.vue`
 
 **What it does**:
+
 - Displays scraps in ultra-compact, terminal-style rows
 - Shows metadata indicators: `r`(toread), `s`(shared), `e`(embedding), `p`(processing)
 - Clickable tags for filtering
@@ -15,6 +17,7 @@ This document explains how to integrate the data-dense scrapbook components copi
 - Fixed-width columns for perfect vertical scanning
 
 **How to use**:
+
 ```vue
 <template>
   <DataDense :scrap="scrap" />
@@ -22,9 +25,11 @@ This document explains how to integrate the data-dense scrapbook components copi
 ```
 
 ### 2. `useScraps.ts` - Enhanced composable with filtering
+
 **Location**: `composables/useScraps.ts`
 
 **Features**:
+
 - Advanced filtering by type, source, shared status
 - Sorting options (newest, oldest, updated)
 - Pagination with infinite scroll support
@@ -32,16 +37,17 @@ This document explains how to integrate the data-dense scrapbook components copi
 - Date processing to prevent future dates
 
 **How to use**:
+
 ```js
-const { 
-  scraps, 
-  isLoading, 
-  error, 
-  loadMore, 
+const {
+  scraps,
+  isLoading,
+  error,
+  loadMore,
   fetchScraps,
   getMediaUrl,
   getDisplayTitle,
-  getSourceData 
+  getSourceData
 } = useScraps()
 
 // Fetch with filters
@@ -53,9 +59,11 @@ fetchScraps({
 ```
 
 ### 3. Tag Filtering Page
+
 **Location**: `pages/tag/[tag].vue`
 
 **What it does**:
+
 - Shows all scraps filtered by a specific tag
 - Uses the same data-dense display
 - Breadcrumb navigation back to main view
@@ -64,9 +72,11 @@ fetchScraps({
 **URL**: `/tag/politics`, `/tag/tech`, etc.
 
 ### 4. Dense View Page
+
 **Location**: `pages/dense.vue`
 
 **What it does**:
+
 - Alternative view to the main news layout
 - Shows ALL scraps in data-dense format
 - Includes scrolling marquee legend
@@ -77,6 +87,7 @@ fetchScraps({
 ## Integration Steps
 
 ### Step 1: Add Dense View to Navigation
+
 Add a link to the dense view in your main layout:
 
 ```vue
@@ -86,12 +97,13 @@ Add a link to the dense view in your main layout:
 ```
 
 ### Step 2: Make Tags Clickable in Existing Components
+
 Update `HeadlineLink.vue` to make tags clickable:
 
 ```vue
 <!-- Replace existing tag display with: -->
-<NuxtLink 
-  v-for="tag in article.tags" 
+<NuxtLink
+  v-for="tag in article.tags"
   :key="tag"
   :to="`/tag/${tag}`"
   class="text-xs bg-gray-100 px-1 rounded hover:bg-gray-200"
@@ -101,6 +113,7 @@ Update `HeadlineLink.vue` to make tags clickable:
 ```
 
 ### Step 3: Add Dense Mode Toggle
+
 Add a toggle between normal and dense view on the homepage:
 
 ```vue
@@ -127,19 +140,26 @@ Add a toggle between normal and dense view on the homepage:
 ```
 
 ### Step 4: Style Integration
+
 The DataDense component uses these Tailwind classes that should work with your existing setup:
+
 - `bg-black`, `text-zinc-100` for dark theme
 - `hover:bg-zinc-900/10` for subtle hover
 - `font-mono` for terminal aesthetic
 - Various `text-[8px]` to `text-[11px]` micro-typography
 
 ### Step 5: Add Marquee Legend (Optional)
+
 Copy the CSS animation from `dense.vue` to add the scrolling legend:
 
 ```css
 @keyframes marquee {
-  0% { transform: translateX(100%) }
-  100% { transform: translateX(-100%) }
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
 }
 
 .animate-marquee {
@@ -150,6 +170,7 @@ Copy the CSS animation from `dense.vue` to add the scrolling legend:
 ## Enhanced Features Available
 
 ### Advanced Filtering
+
 ```js
 // Filter by multiple criteria
 fetchScraps({
@@ -163,30 +184,37 @@ fetchScraps({
 ```
 
 ### Source-Based Views
+
 Create pages like `/source/reuters`, `/source/apnews` using the same pattern as tag filtering.
 
 ### Search Integration
+
 The enhanced `useScraps` can be extended to support full-text search across content, titles, and summaries.
 
 ### Stats Dashboard
+
 Use the helper functions to create analytics:
+
 - Most active sources
-- Tag frequency analysis  
+- Tag frequency analysis
 - Content type breakdown
 - Publishing velocity
 
 ## Migration Strategy
 
 ### Phase 1: Add Dense View
+
 1. Test that `/dense` works with your existing data
 2. Verify tag filtering works with `/tag/[tag]`
 
 ### Phase 2: Enhance Existing Views
+
 1. Make tags clickable in `HeadlineLink.vue`
 2. Add view mode toggle to homepage
 3. Test that filtering preserves news-focused content
 
 ### Phase 3: Advanced Features
+
 1. Add source filtering
 2. Implement search
 3. Create stats/analytics views
@@ -204,7 +232,8 @@ Use the helper functions to create analytics:
 ## Quick Start
 
 To immediately see the dense view:
-1. Visit `/dense` 
+
+1. Visit `/dense`
 2. Click any tag to filter
 3. Use the breadcrumb to navigate back
 
